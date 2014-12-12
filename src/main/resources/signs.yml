@@ -1,0 +1,20 @@
+# This is a sample sign config.
+Signs:
+  - ID: 4705c37a-7b23-11e4-b116-123b93f75cba
+    Location:
+      X: 10
+      Y: 35
+      Z: 12
+      World: world
+    Item-Type: LOG
+    Item-Durability: 2
+    Type: WALL_SIGN
+  - ID: 4705c834-7b23-11e4-b116-123b93f75cba
+    Location:
+      X: 110
+      Y: 35
+      Z: 12
+      World: world
+    Item-Type: DIAMOND_ORE
+    Item-Durability: 0
+    Type: SIGN_POST

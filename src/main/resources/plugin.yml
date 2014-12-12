@@ -1,0 +1,13 @@
+name: JustShop
+main: com.aaomidi.justshop.JustShop
+depend: [Vault, Essentials]
+softdepend: [BuyCraft]
+version: 1.0
+load: POSTWORLD
+commands:
+  shop:
+    description: Shop command for JustShop.
+  buy:
+    description: Buy an item using a command.
+  sell:
+    description: Sell an item using a command.

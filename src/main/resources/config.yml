@@ -1,0 +1,72 @@
+#         ,---._
+#       .-- -.' \                             ___      .--.--.     ,---,
+#       |    |   :                          ,--.'|_   /  /    '. ,--.' |              ,-.----.
+#       :    ;   |         ,--,             |  | :,' |  :  /`. / |  |  :       ,---.  \    /  \
+#       :        |       ,'_ /|   .--.--.   :  : ' : ;  |  |--`  :  :  :      '   ,'\ |   :    |
+#       |    :   :  .--. |  | :  /  /    '.;__,'  /  |  :  ;_    :  |  |,--. /   /   ||   | .\ :
+#       :         ,'_ /| :  . | |  :  /`./|  |   |    \  \    `. |  :  '   |.   ; ,. :.   : |: |
+#       |    ;   ||  ' | |  . . |  :  ;_  :__,'| :     `----.   \|  |   /' :'   | |: :|   |  \ :
+#   ___ l         |  | ' |  | |  \  \    `. '  : |__   __ \  \  |'  :  | | |'   | .; :|   : .  |
+# /    /\    J   ::  | : ;  ; |   `----.   \|  | '.'| /  /`--'  /|  |  ' | :|   :    |:     |`-'
+#/  ../  `..-    ,'  :  `--'   \ /  /`--'  /;  :    ;'--'.     / |  :  :_:,' \   \  / :   : :
+#\    \         ; :  ,      .-./'--'.     / |  ,   /   `--'---'  |  | ,'      `----'  |   | :
+# \    \      ,'   `--`----'      `--'---'   ---`-'              `--''                `---'.|
+#  "---....--'                                                                          `---`                                                                                                                                                                                    |___/
+General-Settings:
+  Prefix: "&7[&5JustShop&7]&f "
+Default-Settings:
+  Lore:
+    - "Left click to buy. {buy-price}"
+    - "Right click to sell. {sell-price}"
+GUI-Settings:
+  Title: "JustShop GUI Shop"
+  # The configuration for the back button in the inventory.
+  Back-Button:
+    Icon: "Paper"
+    Name: "Back"
+    Lore:
+      - "Left click to go back to the categories."
+      - ""
+    Glowing: true
+  # You can't use the default settings for this section.
+  Categories:
+    - ID: 1
+      Icon: "Grass"
+      Name: "Random Category"
+      Lore:
+        - "This is a random lore."
+        - "This is line two."
+        - "This is line three."
+      Glowing: true
+    - ID: 2
+      Name: "I like categories"
+      Icon: "Stone"
+      Lore:
+        - "Lores are awesome"
+Stock:
+    # Icon is required.
+  - Icon: "Log"
+    # Will default to 0 if nothing entered.
+    Durability: 2
+    # Will default to item's original name.
+    Name: "Name"
+    # Will default to whatever is in the Default-Settings section on the configuration.
+    Lore:
+      - "What is love?"
+    # Buy-Price is required.
+    Buy-Price: 10
+    # Sell-Price is required.
+    Sell-Price: 5
+    # Category is required.
+    Category: 1
+    # Will default to false if left empty.
+    Glowing: true
+    # Will not have a per-item permission if left empty.
+    Permission: "my.custom.permission"
+  - Icon: "DiamondOre"
+    Category: 2
+    Buy-Price: 14.3
+    Sell-Price: 45.7
+
+
+
