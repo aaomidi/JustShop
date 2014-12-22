@@ -4,7 +4,6 @@ import com.aaomidi.justshop.JustShop;
 import com.aaomidi.justshop.engine.global.GlobalCaching;
 import com.aaomidi.justshop.engine.global.objects.JSCategory;
 import com.aaomidi.justshop.engine.global.objects.JSItem;
-import com.aaomidi.justshop.utils.StaticManager;
 import net.ess3.api.IItemDb;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -218,8 +217,8 @@ public class ConfigurationReader {
     }
 
     public void reloadConfiguration() {
-        StaticManager.getInstance().reloadConfig();
-        config = StaticManager.getInstance().getConfig();
+        instance.reloadConfig();
+        config = instance.getConfig();
         generalSettings = config.getConfigurationSection("General-Settings");
         defaultSettings = config.getConfigurationSection("Default-Settings");
         guiSettings = config.getConfigurationSection("GUI-Settings");

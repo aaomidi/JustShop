@@ -53,7 +53,7 @@ public class SignConfiguration {
             System.out.println("Debug 1 - register");
             return jsSign;
         }
-        String uuid = UUID.randomUUID().toString();
+        UUID uuid = UUID.randomUUID();
         Map<String, Object> main = new HashMap<>();
         Map<String, Object> location = new HashMap<>();
 
@@ -62,7 +62,7 @@ public class SignConfiguration {
         location.put("Z", jsSign.getLocation().getZ());
         location.put("World", jsSign.getLocation().getWorldName());
 
-        main.put("ID", uuid);
+        main.put("ID", uuid.toString());
         main.put("Location", location);
         main.put("Item-Type", jsSign.getItem().getIcon().toString());
         main.put("Item-Durability", jsSign.getItem().getDurability());
@@ -74,6 +74,7 @@ public class SignConfiguration {
         jsConfig.getConfig().set("Signs", list);
         jsConfig.save();
         jsConfig.load();
+        jsSign.setUuid(uuid);
         signManager.getSignCache().add(jsSign);
         return jsSign;
     }
@@ -186,6 +187,10 @@ public class SignConfiguration {
 
         jsConfig.getConfig().set("Signs", signs);
         jsConfig.save();
+        jsConfig.load();
+    }
+
+    public void reload() {
         jsConfig.load();
     }
 

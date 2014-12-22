@@ -48,7 +48,7 @@ public class SignPlaceListener implements Listener {
             StringManager.sendMessage(player, "&bSign created successfully.");
             event.setLine(0, StringManager.colorizeString("&l[JustShop]"));
             event.setLine(1, StringManager.colorizeString("&b" + JustShop.getEssentials().getItemDb().name(jsSign.getItem().toItem())));
-            event.setLine(2, StringManager.colorizeString("&bbuy: &a$" + jsSign.getItem().getBuyPrice()));
+            event.setLine(2, StringManager.colorizeString("&bBuy: &a$" + jsSign.getItem().getBuyPrice()));
             event.setLine(3, StringManager.colorizeString("&bSell: &c$" + jsSign.getItem().getSellPrice()));
             return;
         }

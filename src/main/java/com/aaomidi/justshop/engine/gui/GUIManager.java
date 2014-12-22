@@ -15,10 +15,10 @@ public class GUIManager {
 
     public GUIManager(JustShop instance) {
         this.instance = instance;
-        this.reloadPlugin();
+        this.reload();
     }
 
-    public void reloadPlugin() {
+    public void reload() {
         categoryInventoryCreator = null;
         categoryInventoryCreator = new CategoryInventoryCreator(instance);
         stockInventoryCreator = null;

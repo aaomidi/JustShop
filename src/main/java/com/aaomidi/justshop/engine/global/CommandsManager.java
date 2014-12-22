@@ -1,9 +1,7 @@
 package com.aaomidi.justshop.engine.global;
 
 import com.aaomidi.justshop.JustShop;
-import com.aaomidi.justshop.commands.BuyCommand;
-import com.aaomidi.justshop.commands.SellCommand;
-import com.aaomidi.justshop.commands.ShopCommand;
+import com.aaomidi.justshop.commands.*;
 import com.aaomidi.justshop.engine.global.objects.JSCommand;
 import com.aaomidi.justshop.utils.StringManager;
 import org.bukkit.command.Command;
@@ -32,6 +30,8 @@ public class CommandsManager implements CommandExecutor {
         registerCommand(new ShopCommand(instance, "shop", "justshop.shop", true, "&b/shop"));
         registerCommand(new BuyCommand(instance, "buy", "justshop.buy", true, "&b/buy &a[Item] [Amount]"));
         registerCommand(new SellCommand(instance, "sell", "justshop.sell", true, "&b/sell &a[hand/all/item]"));
+        registerCommand(new ShopReloadCommand(instance, "shopreload", "justshop.reload", false, "&b/shopreload"));
+        registerCommand(new WorthCommand(instance, "worth", "justshop.worth", false, "&b/worth &a[Item]"));
     }
 
     public void registerCommand(JSCommand jsCommand) {

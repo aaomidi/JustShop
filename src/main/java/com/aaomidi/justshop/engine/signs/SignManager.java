@@ -27,10 +27,10 @@ public class SignManager {
 
     public SignManager(JustShop instance) {
         this.instance = instance;
-        this.reloadPlugin();
+        this.init();
     }
 
-    public void reloadPlugin() {
+    public void init() {
         signCache = new SignCache();
         signConfiguration = new SignConfiguration(instance, this);
         signPlaceListener = new SignPlaceListener(instance);
@@ -40,5 +40,11 @@ public class SignManager {
         instance.getServer().getPluginManager().registerEvents(signPlaceListener, instance);
         instance.getServer().getPluginManager().registerEvents(signInteractListener, instance);
         instance.getServer().getPluginManager().registerEvents(signBreakListener, instance);
+    }
+
+    public void reload() {
+        signConfiguration.reload();
+        signCache.reload();
+        signConfiguration.loadSigns();
     }
 }

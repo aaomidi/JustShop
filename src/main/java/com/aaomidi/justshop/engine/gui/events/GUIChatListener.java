@@ -25,7 +25,7 @@ public class GUIChatListener implements Listener {
         event.setCancelled(true);
         event.getRecipients().clear();
         JSItem jsItem = GlobalCaching.getItemBuyCache().get(player);
-        if (jsItem.getSellPrice() <= 0) {
+        if (jsItem.getSellPrice() <= 0 && !jsItem.isBuy()) {
             StringManager.sendMessage(player, "&cThat item is not saleable.");
             return;
         }

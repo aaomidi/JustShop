@@ -4,6 +4,7 @@ import com.aaomidi.justshop.JustShop;
 import com.aaomidi.justshop.engine.signs.objects.JSSign;
 import com.aaomidi.justshop.utils.StringManager;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -34,7 +35,10 @@ public class SignBreakListener implements Listener {
             event.setCancelled(true);
             return;
         }
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            StringManager.sendMessage(player, "&cYou need to be in creative to unregister a sign.");
+        }
         jsSign.unregister();
-
+        StringManager.sendMessage(player, "&aSign was successfully removed.");
     }
 }

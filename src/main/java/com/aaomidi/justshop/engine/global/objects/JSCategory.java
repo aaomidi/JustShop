@@ -50,6 +50,7 @@ public class JSCategory {
         if (glowing) {
             Glow.appply(itemStack);
         }
+        itemStack.setItemMeta(itemMeta);
         _item = itemStack;
         return itemStack;
     }

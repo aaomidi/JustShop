@@ -6,6 +6,7 @@ import com.aaomidi.justshop.engine.global.objects.JSItem;
 import com.aaomidi.justshop.engine.signs.objects.JSSign;
 import com.aaomidi.justshop.utils.StringManager;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.GameMode;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -24,16 +25,17 @@ public class SignInteractListener implements Listener {
     public void onSignInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
+        if (player.hasPermission("justshop.createsigns") && player.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
         if (block == null) {
             return;
         }
         if (!(block.getState() instanceof Sign)) {
-            System.out.println("Debug 1 - edit");
             return;
         }
         JSSign jsSign = instance.getSignManager().getSignCache().getSignAtLocation(block.getLocation());
         if (jsSign == null) {
-            System.out.println("Debug 2 - interact");
             return;
         }
         JSItem newJSItem = jsSign.getItem().clone();

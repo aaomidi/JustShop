@@ -29,4 +29,10 @@ public class SignCache {
     public JSSign getSignAtLocation(Location loc) {
         return locationJSSignMap.get(new JSLocation().fromLocation(loc));
     }
+
+    public void reload() {
+        uuidjsSignMap.clear();
+        jsIdentifierJSSignMap.clear();
+        locationJSSignMap.clear();
+    }
 }

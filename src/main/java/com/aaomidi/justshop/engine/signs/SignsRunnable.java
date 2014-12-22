@@ -39,7 +39,7 @@ public class SignsRunnable {
             }
             sign.setLine(0, StringManager.colorizeString("&l[JustShop]"));
             sign.setLine(1, StringManager.colorizeString("&b" + JustShop.getEssentials().getItemDb().name(jsSign.getItem().toItem())));
-            sign.setLine(2, StringManager.colorizeString("&bbuy: &a$" + jsSign.getItem().getBuyPrice()));
+            sign.setLine(2, StringManager.colorizeString("&bBuy: &a$" + jsSign.getItem().getBuyPrice()));
             sign.setLine(3, StringManager.colorizeString("&bSell: &c$" + jsSign.getItem().getSellPrice()));
             sign.update();
         }

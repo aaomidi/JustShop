@@ -11,3 +11,5 @@ commands:
     description: Buy an item using a command.
   sell:
     description: Sell an item using a command.
+  shopreload:
+    description: Reload the shop plugin

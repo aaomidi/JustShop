@@ -11,7 +11,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -39,11 +42,7 @@ public class JSSign {
     public static JSSign fromSign(Sign sign, String lines[]) {
         JSSign temp = null;
         String information = lines[1];
-        System.out.println("fromSign - 1");
-        System.out.println("Information: " + information);
-        System.out.println("Information: " + Arrays.toString(sign.getLines()));
         if (information == null) {
-            System.out.println("fromSign - 2");
             return temp;
         }
         // Split
@@ -52,31 +51,24 @@ public class JSSign {
         if (info.length == 2) {
             try {
                 itemDurability = Integer.valueOf(info[1]);
-                System.out.println("fromSign - 3");
             } catch (Exception ex) {
-                System.out.println("fromSign - 4");
                 return temp;
             }
         } else {
-            System.out.println("fromSign - 5");
             itemDurability = 0;
         }
         Material mat;
         try {
             String itemType = info[0];
             mat = JustShop.getEssentials().getItemDb().get(itemType).getType();
-            System.out.println("fromSign - 6");
         } catch (Exception ex) {
-            System.out.println("fromSign - 7");
             return temp;
         }
         if (mat == null) {
-            System.out.println("fromSign - 8");
             return temp;
         }
         JSItem jsItem = GlobalCaching.getItemCache().getItemByMaterialAndDurability(mat, itemDurability);
         if (jsItem == null) {
-            System.out.println("fromSign - 9");
             return temp;
         }
         // Create the sign.
@@ -84,7 +76,6 @@ public class JSSign {
         temp.setLocation(sign.getLocation());
         temp.setItem(jsItem);
         temp.setSignType(sign.getType());
-        System.out.println("fromSign - 10");
         return temp;
     }
 
@@ -98,11 +89,16 @@ public class JSSign {
     }
 
     public void unregister() {
+        System.out.println(uuid.toString());
         JSConfig jsConfig = SignConfiguration.getJsConfig();
         List<Map<?, ?>> signs = jsConfig.getConfig().getMapList("Signs");
         Iterator<Map<?, ?>> iterator = signs.iterator();
         while (iterator.hasNext()) {
             Map<?, ?> sign = iterator.next();
+            System.out.println(sign);
+            if (!sign.containsKey("ID")) {
+                continue;
+            }
             if (!sign.get("ID").equals(uuid.toString())) {
                 System.out.println(sign.get("ID"));
                 continue;
