@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -57,12 +56,7 @@ public class JSCategory {
 
     public void onClick(Player player) {
         Inventory inventory = instance.getGuiManager().getStockInventoryCreator().createInventory(this);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                player.openInventory(inventory);
-            }
-        }.runTaskLater(instance, 1L);
+        player.openInventory(inventory);
         GUICaching.getOpenMainInventory().remove(player);
         GUICaching.getOpenCategoryInventory().put(player, id);
     }

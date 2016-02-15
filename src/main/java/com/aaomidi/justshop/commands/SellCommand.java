@@ -73,7 +73,7 @@ public class SellCommand extends JSCommand {
                 }
                 itemName = JustShop.getEssentials().getItemDb().name(item);
                 if (args.length == 1) {
-                    StringManager.sendMessage(commandSender, String.format("&aPlease enter the amount of &6%s &ayou want to buy.", itemName));
+                    StringManager.sendMessage(commandSender, String.format("&aPlease enter the amount of &6%s &ayou want to sell.", itemName));
                     GlobalCaching.getItemBuyCache().put(player, jsItem);
                     return true;
                 }

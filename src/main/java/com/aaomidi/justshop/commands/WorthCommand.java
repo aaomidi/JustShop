@@ -46,7 +46,7 @@ public class WorthCommand extends JSCommand {
             StringManager.sendMessage(commandSender, "&cThat item does not exist in the shop.");
             return true;
         }
-        StringManager.sendMessage(commandSender, String.format("&a%s &bis &a%f &bto buy and &a%f &bto sell.", JustShop.getEssentials().getItemDb().name(jsItem.toItem()), jsItem.getBuyPrice(), jsItem.getSellPrice()));
+        StringManager.sendMessage(commandSender, String.format("&a%s &bis &a%.2f &bto buy and &a%.2f &bto sell.", JustShop.getEssentials().getItemDb().name(jsItem.toItem()), jsItem.getBuyPrice(), jsItem.getSellPrice()));
         return true;
     }
 }

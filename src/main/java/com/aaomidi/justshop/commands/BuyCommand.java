@@ -28,20 +28,22 @@ public class BuyCommand extends JSCommand {
         String itemInformation[] = args[0].split(":");
         String itemName = itemInformation[0];
         int durability = 0;
-        if (itemInformation.length == 2) {
-            try {
-                durability = Integer.parseInt(itemInformation[1]);
-            } catch (NumberFormatException ex) {
-                StringManager.sendMessage(commandSender, "&cThe entered durability was not an Integer.");
-            }
-        }
+
         try {
             item = JustShop.getEssentials().getItemDb().get(itemName);
         } catch (Exception ex) {
             StringManager.sendMessage(commandSender, "&cThat item was not recognized.");
             return true;
         }
-        JSItem jsItem = GlobalCaching.getItemCache().getItemByMaterialAndDurability(item.getType(), durability);
+        if (itemInformation.length == 2) {
+            try {
+                durability = Integer.parseInt(itemInformation[1]);
+                item.setDurability((short) durability);
+            } catch (NumberFormatException ex) {
+                StringManager.sendMessage(commandSender, "&cThe entered durability was not an Integer.");
+            }
+        }
+        JSItem jsItem = GlobalCaching.getItemCache().getItemByMaterialAndDurability(item.getType(), (int) item.getDurability());
         if (jsItem == null) {
             StringManager.sendMessage(commandSender, "&cThat item does not exist in the shop.");
             return true;
@@ -54,8 +56,10 @@ public class BuyCommand extends JSCommand {
 
         switch (args.length) {
             case 1:
+                JSItem newJSItem = jsItem.clone();
+                newJSItem.setBuy(true);
                 StringManager.sendMessage(commandSender, String.format("&aPlease enter the amount of &6%s &ayou want to buy.", itemName));
-                GlobalCaching.getItemBuyCache().put(player, jsItem);
+                GlobalCaching.getItemBuyCache().put(player, newJSItem);
                 break;
             case 2:
                 int amount;
@@ -67,6 +71,7 @@ public class BuyCommand extends JSCommand {
                 }
                 if (amount <= 0) {
                     StringManager.sendMessage(commandSender, "&cMoo!");
+                    return true;
                 }
                 jsItem.onItemBuy(player, amount);
                 break;

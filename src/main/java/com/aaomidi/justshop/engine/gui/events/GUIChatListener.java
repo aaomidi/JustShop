@@ -8,6 +8,7 @@ import com.aaomidi.justshop.utils.StringManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -18,18 +19,18 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 public class GUIChatListener implements Listener {
     private final JustShop instance;
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (!GlobalCaching.getItemBuyCache().containsKey(player)) return;
-        event.setCancelled(true);
+        String message = event.getMessage();
         event.getRecipients().clear();
+        event.setCancelled(true);
         JSItem jsItem = GlobalCaching.getItemBuyCache().get(player);
         if (jsItem.getSellPrice() <= 0 && !jsItem.isBuy()) {
             StringManager.sendMessage(player, "&cThat item is not saleable.");
             return;
         }
-        String message = event.getMessage();
         Integer amount = 0;
         try {
             amount = Integer.valueOf(message);
@@ -38,7 +39,7 @@ public class GUIChatListener implements Listener {
             GUICaching.clearCache(player);
         }
         if (amount <= 0) {
-            StringManager.sendMessage(player, "&cYour entry must be larger than 0.");
+            StringManager.sendMessage(player, "&cMoo!");
             GUICaching.clearCache(player);
             return;
         }

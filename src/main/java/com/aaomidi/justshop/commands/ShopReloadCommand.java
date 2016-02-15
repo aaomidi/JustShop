@@ -19,6 +19,7 @@ public class ShopReloadCommand extends JSCommand {
         getInstance().getConfigurationReader().reloadConfiguration();
         getInstance().getSignManager().reload();
         getInstance().getGuiManager().reload();
+        getInstance().getSignManager().getSignsRunnable().reCreateSigns();
         StringManager.sendMessage(commandSender, "&bConfiguration reloaded.");
         return true;
     }

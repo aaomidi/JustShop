@@ -42,6 +42,7 @@ public class JustShop extends JavaPlugin {
         if (!file.exists()) {
             this.saveDefaultConfig();
         }
+        this.getLogger().setLevel(Level.INFO);
     }
 
     @Override

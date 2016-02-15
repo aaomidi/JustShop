@@ -49,7 +49,12 @@ public class GUIInventoryListener implements Listener {
             StringManager.sendMessage(player, "&cThere was an error processing your request.");
             GUICaching.clearCache(player);
             instance.getLogger().log(Level.INFO, "The clicked slot returned an empty jsCategory.");
-            player.closeInventory();
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.closeInventory();
+                }
+            }.runTask(instance);
             return;
         }
         new BukkitRunnable() {
@@ -58,7 +63,7 @@ public class GUIInventoryListener implements Listener {
                 player.closeInventory();
                 jsCategory.onClick(player);
             }
-        }.runTaskLater(instance, 1L);
+        }.runTask(instance);
 
     }
 
@@ -86,11 +91,16 @@ public class GUIInventoryListener implements Listener {
                 @Override
                 public void run() {
                     player.closeInventory();
-                    player.openInventory(instance.getGuiManager().getCategoryInventoryCreator().getInventory());
-                    GUICaching.clearCache(player);
-                    GUICaching.getOpenMainInventory().add(player);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            player.openInventory(instance.getGuiManager().getCategoryInventoryCreator().getInventory());
+                            GUICaching.clearCache(player);
+                            GUICaching.getOpenMainInventory().add(player);
+                        }
+                    }.runTask(instance);
                 }
-            }.runTaskLater(instance, 1L);
+            }.runTask(instance);
             return;
         }
         JSItem jsItem = GlobalCaching.getItemCache().getCategoryItems(category).get(slot);
@@ -102,33 +112,33 @@ public class GUIInventoryListener implements Listener {
             return;
         }
         JSItem newJSItem = jsItem.clone();
-        switch (event.getClick()) {
-            case RIGHT:
-                StringManager.sendMessage(player, "&aPlease enter the amount you want to sell.");
-                newJSItem.setBuy(false);
-                GlobalCaching.getItemBuyCache().put(player, newJSItem);
-                break;
-            case LEFT:
+        if (event.getClick().isRightClick()) {
+            StringManager.sendMessage(player, "&aPlease enter the amount you want to sell.");
+            newJSItem.setBuy(false);
+            GlobalCaching.getItemBuyCache().put(player, newJSItem);
+        } else if (event.getClick().isLeftClick()) {
                 if (!player.hasPermission(newJSItem.getPermission())) {
                     StringManager.sendMessage(player, "&cYou do not have permission to buy this item.");
                     return;
                 }
-                StringManager.sendMessage(player, "&aPlease enter the amount you want to buy.");
-                newJSItem.setBuy(true);
-                GlobalCaching.getItemBuyCache().put(player, newJSItem);
-                break;
-            default:
-                StringManager.sendMessage(player, "&cOnly use left and right clicks.");
-                newJSItem = null;
-                GUICaching.getOpenCategoryInventory().remove(player);
-                break;
+            StringManager.sendMessage(player, "&aPlease enter the amount you want to buy.");
+            newJSItem.setBuy(true);
+            GlobalCaching.getItemBuyCache().put(player, newJSItem);
+        } else {
+            StringManager.sendMessage(player, "&cOnly use left and right clicks.");
+            newJSItem = null;
+            GUICaching.getOpenCategoryInventory().remove(player);
+            player.closeInventory();
+            instance.getLogger().log(Level.INFO, String.format("%s tried to glitch an item out of the shop.", player.getName()));
+            return;
         }
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 player.closeInventory();
             }
-        }.runTaskLater(instance, 1L);
+        }.runTask(instance);
     }
 
     public void onInventoryClose(InventoryCloseEvent event) {

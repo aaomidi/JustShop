@@ -52,7 +52,7 @@ public class ConfigurationReader {
                     throw new Error("Unrecoverable error occurred at the category settings.\nKey was not a string.");
                 }
                 String key = (String) entry.getKey();
-                instance.getLogger().log(Level.INFO, String.format("Reading category %s with the value %s", key, String.valueOf(entry.getValue())));
+                instance.getLogger().log(Level.FINE, String.format("Reading category %s with the value %s", key, String.valueOf(entry.getValue())));
                 switch (key.toLowerCase()) {
                     case "id":
                         if (entry.getValue() instanceof Integer) {
@@ -113,7 +113,7 @@ public class ConfigurationReader {
                     throw new Error("Unrecoverable error occurred at the stock settings.\nKey was not a string.");
                 }
                 String key = (String) entry.getKey();
-                instance.getLogger().log(Level.INFO, String.format("Reading stock %s with the value %s", key, String.valueOf(entry.getValue())));
+                instance.getLogger().log(Level.FINE, String.format("Reading stock %s with the value %s", key, String.valueOf(entry.getValue())));
                 switch (key.toLowerCase()) {
                     case "icon":
                         if (entry.getValue() instanceof String) {

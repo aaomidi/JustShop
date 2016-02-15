@@ -101,6 +101,10 @@ public class JSItem {
 
     // Item Buy
     public boolean onItemBuy(Player player, int amount) {
+        if (amount <= 0) {
+            return false;
+        }
+
         EconomyResponse response = JustShop.getEconomy().withdrawPlayer(player, buyPrice * amount);
         if (response.type.equals(EconomyResponse.ResponseType.SUCCESS)) {
             PlayerInventoryManager.addItems(player, toItem(), amount);
